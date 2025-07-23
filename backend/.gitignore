@@ -1,0 +1,34 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.sqlite3
+
+# Virtual environments
+.venv/
+venv/
+
+# Env variables
+.env
+
+# Logs
+*.log
+
+# Caches
+.mypy_cache/
+.pytest_cache/
+
+# Editor/IDE configs
+.vscode/
+.idea/
+
+# Docker
+__pycache__/
+app/__pycache__/
+app/*.pyc
+app/*.pyo
+*.py[cod]
+*.pyo
+*.pyd
