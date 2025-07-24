@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from sqlalchemy import text
-from app.db import SessionLocal
+from sqlalchemy import text, inspect
+from app.db import SessionLocal, engine
 from app.llm import generate_sql
 
 app = FastAPI()
@@ -19,27 +19,50 @@ app.add_middleware(
 class QuestionRequest(BaseModel):
     question: str
 
-SCHEMA_DESCRIPTION = """
-Table: sales
-Columns:
-- date: string (format: M/D/YYYY)
-- week_day: string
-- hour: string
-- ticket_number: string
-- waiter: integer
-- product_name: string
-- quantity: float
-- unitary_price: integer
-- total: integer
+def get_table_schema():
+    """Get schema from the actual database table"""
+    inspector = inspect(engine)
+    tables = inspector.get_table_names()
+    
+    if not tables:
+        return "No tables found. Please load a CSV file first."
+    
+    table_name = tables[0]
+    columns = inspector.get_columns(table_name)
+    
+    schema_lines = [f"Table: {table_name}", "Columns:"]
+    
+    for column in columns:
+        col_name = column['name']
+        col_type = str(column['type']).lower()
+        
+        if 'varchar' in col_type or 'text' in col_type:
+            type_desc = "string"
+        elif 'integer' in col_type:
+            type_desc = "integer"
+        elif 'float' in col_type or 'numeric' in col_type:
+            type_desc = "float"
+        else:
+            type_desc = "string"
+        
+        schema_lines.append(f"- {col_name}: {type_desc}")
+    
+    schema = "\n".join(schema_lines)
 
-Note: The "date" column is a string in M/D/YYYY format, not ISO format. Queries must use dates like '10/10/2024' instead of '2024-10-10'.
-"""
+    if any(col['name'] == 'date' for col in columns):
+        schema += (
+            "\n\nNote: The 'date' column is a string in M/D/YYYY format, not ISO format. "
+            "Queries must use dates like '10/10/2024' instead of '2024-10-10'."
+        )
+
+    return schema
 
 @app.post("/ask")
 def ask_question(request: QuestionRequest):
     session = SessionLocal()
     try:
-        sql = generate_sql(request.question, SCHEMA_DESCRIPTION)
+        schema_description = get_table_schema()
+        sql = generate_sql(request.question, schema_description)
         query = text(sql)
         result = session.execute(query)
         rows = [dict(row._mapping) for row in result]
