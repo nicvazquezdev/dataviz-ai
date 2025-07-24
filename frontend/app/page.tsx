@@ -8,6 +8,8 @@ interface ApiResponse {
   data: Record<string, unknown>[];
   sql: string;
   question?: string;
+  error?: string;
+  type?: string;
 }
 
 export default function Home() {
@@ -34,7 +36,13 @@ export default function Home() {
       setResponse({ ...data, question: questionText });
     } catch (error) {
       console.error("Error fetching data:", error);
-      // TODO: add error handling
+      setResponse({
+        data: [],
+        sql: "",
+        question: questionText,
+        error: "Network error: Unable to connect to the server",
+        type: "network_error",
+      });
     } finally {
       setLoading(false);
     }
@@ -62,9 +70,7 @@ export default function Home() {
           />
         </div>
 
-        {response && (
-          <ResultsPanel response={response} />
-        )}
+        {response && <ResultsPanel response={response} />}
       </div>
     </div>
   );

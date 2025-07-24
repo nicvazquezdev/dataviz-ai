@@ -10,6 +10,8 @@ interface ResultsPanelProps {
     data: Record<string, unknown>[];
     sql: string;
     question?: string;
+    error?: string;
+    type?: string;
   };
   className?: string;
 }
@@ -72,7 +74,20 @@ export function ResultsPanel({ response, className }: ResultsPanelProps) {
         </CardHeader>
 
         <CardContent>
-          {canVisualize && (
+          {response.error ? (
+            <div className="mb-6">
+              <div className="flex flex-col items-center justify-center p-8 bg-red-50 border border-red-200 rounded-lg">
+                <div className="text-4xl mb-4">❌</div>
+                <div className="text-lg font-medium text-red-800 mb-2">Invalid Question</div>
+                <div className="text-sm text-red-600 text-center max-w-md">
+                  {response.error}
+                </div>
+                <div className="text-xs text-red-500 mt-2">
+                  Please try asking a clear question about your data, such as &quot;What are the top selling products?&quot; or &quot;Show me sales by date&quot;.
+                </div>
+              </div>
+            </div>
+          ) : canVisualize ? (
             <div className="mb-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-medium text-gray-900">Visualization</h3>
@@ -87,9 +102,9 @@ export function ResultsPanel({ response, className }: ResultsPanelProps) {
                 className="bg-gray-50 rounded-lg p-4"
               />
             </div>
-          )}
+          ) : null}
 
-          {!canVisualize && (
+          {!response.error && !canVisualize && (
             <div className="mb-6">
               <h3 className="font-medium text-gray-900 mb-2">Raw Data</h3>
               <DataVisualization
@@ -100,14 +115,16 @@ export function ResultsPanel({ response, className }: ResultsPanelProps) {
             </div>
           )}
 
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-2">Generated SQL</h3>
-              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto">
-                <pre>{response.sql}</pre>
+          {!response.error && (
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-medium text-gray-900 mb-2">Generated SQL</h3>
+                <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                  <pre>{response.sql}</pre>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
     </div>

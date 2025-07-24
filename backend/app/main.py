@@ -67,7 +67,12 @@ def ask_question(request: QuestionRequest):
         result = session.execute(query)
         rows = [dict(row._mapping) for row in result]
         return {"sql": sql, "data": rows}
-    except Exception as e:
+    except ValueError as e:
+        # Handle invalid questions specifically
+        if "Invalid question" in str(e):
+            return {"error": str(e), "type": "invalid_question"}
         return {"error": str(e)}
+    except Exception as e:
+        return {"error": f"Database error: {str(e)}"}
     finally:
         session.close()
