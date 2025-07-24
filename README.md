@@ -71,7 +71,7 @@ A modern web application that allows users to query their data using natural lan
 ### 1. Clone the Repository
 
 ```bash
-git clone [<repository-url>](https://github.com/nicvazquezdev/mini-nivii.git)
+git clone https://github.com/nicvazquezdev/mini-nivii.git
 cd mini-nivii
 ```
 
