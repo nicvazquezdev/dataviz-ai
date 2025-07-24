@@ -177,8 +177,8 @@ export function DataVisualization({
                     {keys.map((key) => (
                       <td key={key} className="p-3 text-gray-900">
                         {typeof row[key] === "number"
-                          ? row[key].toLocaleString()
-                          : row[key]}
+                          ? (row[key] as number).toLocaleString()
+                          : String(row[key])}
                       </td>
                     ))}
                   </tr>
