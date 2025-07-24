@@ -1,103 +1,114 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+const canChart = (data: any[]): boolean => {
+  if (!data || data.length === 0) return false;
+  const keys = Object.keys(data[0]);
+  if (keys.length !== 2) return false;
+
+  const secondKey = keys[1];
+  return typeof data[0][secondKey] === "number";
+};
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [question, setQuestion] = useState("");
+  const [response, setResponse] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const askQuestion = async () => {
+    setLoading(true);
+    setResponse(null);
+
+    const res = await fetch("http://localhost:8000/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+
+    const data = await res.json();
+    setResponse(data);
+    setLoading(false);
+  };
+
+  return (
+    <main className="max-w-xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Mini Nivii</h1>
+      <textarea
+        className="w-full border p-2 mb-2"
+        rows={3}
+        placeholder="Ask a question..."
+        value={question}
+        onChange={(e) => setQuestion(e.target.value)}
+      />
+      <button
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+        onClick={askQuestion}
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Ask"}
+      </button>
+      {response?.data?.length > 0 && (
+        <div className="mt-6">
+          <h2 className="font-semibold">SQL:</h2>
+          <pre className="bg-gray-100 p-2 text-sm">{response.sql}</pre>
+
+          <h2 className="font-semibold mt-4 mb-2">Result:</h2>
+
+          {canChart(response.data) ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={response.data}>
+                <XAxis dataKey={Object.keys(response.data[0])[0]} />
+                <YAxis />
+                <Tooltip />
+                <Bar
+                  dataKey={Object.keys(response.data[0])[1]}
+                  fill="#3b82f6"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <table className="w-full text-sm mt-2 border">
+              <thead>
+                <tr>
+                  {Object.keys(response.data[0]).map((col) => (
+                    <th key={col} className="border p-2 text-left bg-gray-100">
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {response.data.map((row, idx) => (
+                  <tr key={idx}>
+                    {Object.values(row).map((val, i) => (
+                      <td key={i} className="border p-2">
+                        {val}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+
+      {response?.data?.length === 0 && (
+        <p className="mt-4 text-red-600">No results found.</p>
+      )}
+
+      {response?.error && (
+        <p className="mt-4 text-red-600">Error: {response.error}</p>
+      )}
+    </main>
   );
 }
