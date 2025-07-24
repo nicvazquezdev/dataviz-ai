@@ -49,8 +49,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 py-8 mt-10">
         <div className="text-center my-8">
           <h2 className="text-3xl font-bold mb-4">
             What would you like to know?
