@@ -56,8 +56,7 @@ export default function Home() {
             What would you like to know?
           </h2>
           <p className="text-gray-600 text-lg">
-            Ask questions about your data in plain English and get instant
-            visualizations
+            Ask questions about your data and get instant visualizations
           </p>
         </div>
 

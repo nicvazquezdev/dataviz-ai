@@ -10,7 +10,7 @@ A modern web application that allows users to query their data using natural lan
 
 ## 🚀 Features
 
-- **Natural Language Queries**: Ask questions about your data in plain English
+- **Natural Language Queries**: Ask questions about your data
 - **Smart SQL Generation**: AI-powered SQL query generation using OpenAI GPT
 - **Interactive Visualizations**: Multiple chart types (bar, line, pie, table)
 - **Auto Chart Selection**: Intelligent chart type detection based on data
