@@ -89,6 +89,17 @@ export function ResultsPanel({ response, className }: ResultsPanelProps) {
             </div>
           )}
 
+          {!canVisualize && (
+            <div className="mb-6">
+              <h3 className="font-medium text-gray-900 mb-2">Raw Data</h3>
+              <DataVisualization
+                data={response.data}
+                chartType="table"
+                className="border rounded-lg overflow-hidden"
+              />
+            </div>
+          )}
+
           <div className="space-y-4">
             <div>
               <h3 className="font-medium text-gray-900 mb-2">Generated SQL</h3>
@@ -96,17 +107,6 @@ export function ResultsPanel({ response, className }: ResultsPanelProps) {
                 <pre>{response.sql}</pre>
               </div>
             </div>
-
-            {!canVisualize && (
-              <div>
-                <h3 className="font-medium text-gray-900 mb-2">Raw Data</h3>
-                <DataVisualization
-                  data={response.data}
-                  chartType="table"
-                  className="border rounded-lg overflow-hidden"
-                />
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>

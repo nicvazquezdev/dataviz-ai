@@ -39,9 +39,13 @@ export function DataVisualization({
   if (!data || data.length === 0) {
     return (
       <div
-        className={`flex items-center justify-center h-64 text-gray-500 ${className}`}
+        className={`flex flex-col items-center justify-center h-64 text-gray-500 ${className}`}
       >
-        No data to display
+        <div className="text-6xl mb-4">📊</div>
+        <div className="text-lg font-medium text-gray-700 mb-2">No data found</div>
+        <div className="text-sm text-gray-500 text-center max-w-md">
+          The query executed successfully but returned no results. Try adjusting your search criteria or check if the data exists for the specified conditions.
+        </div>
       </div>
     );
   }

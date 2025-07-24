@@ -62,7 +62,7 @@ export default function Home() {
           />
         </div>
 
-        {response?.data && response.data.length > 0 && (
+        {response && (
           <ResultsPanel response={response} />
         )}
       </div>
