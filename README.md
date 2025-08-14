@@ -1,8 +1,8 @@
-# Mini Nivii - Natural Language Data Query Interface
+# DataViz AI - Natural Language Data Query Interface
 
 A modern web application that allows users to query their data using natural language and get instant visualizations. Built with FastAPI, Next.js, and powered by OpenAI's GPT models.
 
-![Mini Nivii Demo](https://img.shields.io/badge/Status-MVP-green)
+![DataViz AI Demo](https://img.shields.io/badge/Status-MVP-green)
 ![Python](https://img.shields.io/badge/Python-3.9+-blue)
 ![Next.js](https://img.shields.io/badge/Next.js-15.4+-black)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green)
@@ -73,8 +73,8 @@ A modern web application that allows users to query their data using natural lan
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/nicvazquezdev/mini-nivii.git
-cd mini-nivii
+git clone https://github.com/nicvazquezdev/dataviz-ai.git
+cd dataviz-ai
 ```
 
 ### 2. Environment Setup (Optional)
@@ -93,7 +93,7 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 POSTGRES_HOST=db
 POSTGRES_PORT=5432
-POSTGRES_DB=mini_nivii
+POSTGRES_DB=dataviz_ai
 ```
 
 💡 **Note**: If you don't configure an API key, the application will automatically run in **Demo Mode** and show realistic sample data based on your questions.
@@ -154,7 +154,7 @@ Try these natural language queries:
 ### Project Structure
 
 ```
-mini-nivii/
+dataviz-ai/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py          # FastAPI application
