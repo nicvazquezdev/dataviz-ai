@@ -18,6 +18,8 @@ A modern web application that allows users to query their data using natural lan
 - **Error Handling**: Smart validation for invalid questions
 - **Responsive Design**: Modern UI built with Tailwind CSS
 - **Containerized**: Full Docker support for easy deployment
+- **Demo Mode**: Works without API key - shows realistic sample data
+- **Graceful Degradation**: Automatic fallback to demo mode when API key is missing or invalid
 
 ## 🏗️ Architecture
 
@@ -75,9 +77,9 @@ git clone https://github.com/nicvazquezdev/mini-nivii.git
 cd mini-nivii
 ```
 
-### 2. Environment Setup
+### 2. Environment Setup (Optional)
 
-Copy the environment template and add your OpenAI API key:
+For full functionality with real data queries, copy the environment template and add your OpenAI API key:
 
 ```bash
 cp .env.template .env
@@ -94,6 +96,8 @@ POSTGRES_PORT=5432
 POSTGRES_DB=mini_nivii
 ```
 
+💡 **Note**: If you don't configure an API key, the application will automatically run in **Demo Mode** and show realistic sample data based on your questions.
+
 ### 3. Start the Application
 
 ```bash
@@ -105,6 +109,29 @@ docker-compose up --build
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
+
+## 🎭 Demo Mode
+
+The application includes a **Demo Mode** that works without requiring an OpenAI API key:
+
+- **Automatic Activation**: When no API key is configured or if the key is invalid
+- **Smart Data Generation**: Creates realistic sample data based on your question type
+- **Full Visualizations**: Generates charts and graphs just like with real data
+- **Question-Aware**: Different question types produce different visualization types:
+  - Product questions → Bar charts of top products
+  - Date/time questions → Line charts with trends
+  - Waiter questions → Performance comparisons
+  - Revenue questions → Category breakdowns
+  - Quantity questions → Product quantity analysis
+- **Visual Indicator**: Yellow warning banner shows when demo mode is active
+- **Seamless Experience**: No interruption to the user workflow
+
+This makes the application perfect for:
+
+- **Demoing** to stakeholders
+- **Testing** the interface without API costs
+- **Development** without API dependencies
+- **Learning** how the system works
 
 ## 💾 Data Loading
 

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import text, inspect
 from app.db import SessionLocal, engine
-from app.llm import generate_sql
+from app.llm import generate_sql, generate_dummy_data
 
 app = FastAPI()
 
@@ -68,10 +68,23 @@ def ask_question(request: QuestionRequest):
         rows = [dict(row._mapping) for row in result]
         return {"sql": sql, "data": rows}
     except ValueError as e:
+        error_message = str(e)
+        
+        # Handle API key errors and return dummy data
+        if "API_KEY_MISSING" in error_message or "API_KEY_ERROR" in error_message:
+            dummy_result = generate_dummy_data(request.question)
+            return {
+                "sql": dummy_result["sql"],
+                "data": dummy_result["data"],
+                "is_dummy": True,
+                "warning": "Using demo data - OpenAI API key not configured or invalid"
+            }
+        
         # Handle invalid questions specifically
-        if "Invalid question" in str(e):
-            return {"error": str(e), "type": "invalid_question"}
-        return {"error": str(e)}
+        if "Invalid question" in error_message:
+            return {"error": error_message, "type": "invalid_question"}
+        
+        return {"error": error_message}
     except Exception as e:
         return {"error": f"Database error: {str(e)}"}
     finally:
