@@ -145,8 +145,7 @@ def generate_dummy_data(question: str) -> dict:
     
     return {
         "sql": dummy_sql,
-        "data": dummy_data,
-        "is_dummy": True
+        "data": dummy_data
     }
 
 def generate_sql(question: str, schema_description: str) -> str:

@@ -75,9 +75,7 @@ def ask_question(request: QuestionRequest):
             dummy_result = generate_dummy_data(request.question)
             return {
                 "sql": dummy_result["sql"],
-                "data": dummy_result["data"],
-                "is_dummy": True,
-                "warning": "Using demo data - OpenAI API key not configured or invalid"
+                "data": dummy_result["data"]
             }
         
         # Handle invalid questions specifically

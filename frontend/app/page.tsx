@@ -10,8 +10,6 @@ interface ApiResponse {
   question?: string;
   error?: string;
   type?: string;
-  is_dummy?: boolean;
-  warning?: string;
 }
 
 export default function Home() {
