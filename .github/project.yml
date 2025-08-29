@@ -1,0 +1,97 @@
+name: DataViz AI Project
+description: Project management for DataViz AI development
+visibility: public
+
+workflows:
+  - name: Development
+    description: Development workflow for new features and improvements
+    enabled: true
+    tasks:
+      - name: Backlog
+        description: Ideas and potential features
+        status: Backlog
+      - name: To Do
+        description: Ready to be worked on
+        status: To Do
+      - name: In Progress
+        description: Currently being worked on
+        status: In Progress
+      - name: Review
+        description: Ready for review
+        status: Review
+      - name: Done
+        description: Completed work
+        status: Done
+
+  - name: Bug Fixes
+    description: Bug fix workflow
+    enabled: true
+    tasks:
+      - name: Bug Reports
+        description: Reported bugs
+        status: Bug Reports
+      - name: Investigating
+        description: Investigating the issue
+        status: Investigating
+      - name: Fixing
+        description: Working on the fix
+        status: Fixing
+      - name: Testing
+        description: Testing the fix
+        status: Testing
+      - name: Fixed
+        description: Bug has been fixed
+        status: Fixed
+
+fields:
+  - name: Priority
+    type: Single select
+    options:
+      - name: Low
+        color: Gray
+      - name: Medium
+        color: Yellow
+      - name: High
+        color: Orange
+      - name: Critical
+        color: Red
+
+  - name: Type
+    type: Single select
+    options:
+      - name: Feature
+        color: Blue
+      - name: Bug
+        color: Red
+      - name: Documentation
+        color: Green
+      - name: Enhancement
+        color: Purple
+      - name: Security
+        color: Orange
+
+  - name: Component
+    type: Single select
+    options:
+      - name: Frontend
+        color: Blue
+      - name: Backend
+        color: Green
+      - name: Infrastructure
+        color: Purple
+      - name: Documentation
+        color: Gray
+      - name: Testing
+        color: Yellow
+
+  - name: Effort
+    type: Single select
+    options:
+      - name: Small
+        color: Green
+      - name: Medium
+        color: Yellow
+      - name: Large
+        color: Orange
+      - name: Epic
+        color: Red

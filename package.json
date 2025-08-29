@@ -1,0 +1,80 @@
+{
+  "name": "dataviz-ai",
+  "version": "1.0.0",
+  "description": "A modern, open-source web application that allows users to query their data using natural language and get instant visualizations",
+  "main": "index.js",
+  "scripts": {
+    "dev": "docker-compose up --build",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && uvicorn app.main:app --reload",
+    "build": "docker-compose build",
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "clean": "docker-compose down -v --remove-orphans",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && python -m pytest",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && flake8 . && black --check . && isort --check-only .",
+    "lint:frontend": "cd frontend && npm run lint",
+    "format": "npm run format:backend && npm run format:frontend",
+    "format:backend": "cd backend && black . && isort .",
+    "format:frontend": "cd frontend && npm run format",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "docs": "cd backend && python -c \"import app.main; print('API docs available at: http://localhost:8000/docs')\"",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicvazquezdev/dataviz-ai.git"
+  },
+  "keywords": [
+    "data-visualization",
+    "natural-language-processing",
+    "artificial-intelligence",
+    "data-analysis",
+    "openai",
+    "fastapi",
+    "nextjs",
+    "postgresql",
+    "docker",
+    "machine-learning",
+    "sql-generation",
+    "interactive-charts",
+    "data-querying",
+    "web-application",
+    "api",
+    "typescript",
+    "python",
+    "react",
+    "tailwind-css",
+    "recharts"
+  ],
+  "author": {
+    "name": "Nicolas Vazquez",
+    "email": "your-email@example.com",
+    "url": "https://github.com/nicvazquezdev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicvazquezdev/dataviz-ai/issues"
+  },
+  "homepage": "https://github.com/nicvazquezdev/dataviz-ai#readme",
+  "devDependencies": {
+    "all-contributors-cli": "^6.26.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}

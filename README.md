@@ -1,14 +1,18 @@
 # DataViz AI - Natural Language Data Query Interface
 
-A modern web application that allows users to query their data using natural language and get instant visualizations. Built with FastAPI, Next.js, and powered by OpenAI's GPT models.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.4+-black.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green.svg)](https://fastapi.tiangolo.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
+[![Open Issues](https://img.shields.io/github/issues/nicvazquezdev/dataviz-ai)](https://github.com/nicvazquezdev/dataviz-ai/issues)
+[![Stars](https://img.shields.io/github/stars/nicvazquezdev/dataviz-ai)](https://github.com/nicvazquezdev/dataviz-ai/stargazers)
 
-![DataViz AI Demo](https://img.shields.io/badge/Status-MVP-green)
-![Python](https://img.shields.io/badge/Python-3.9+-blue)
-![Next.js](https://img.shields.io/badge/Next.js-15.4+-black)
-![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+A modern, open-source web application that allows users to query their data using natural language and get instant visualizations. Built with FastAPI, Next.js, and powered by OpenAI's GPT models.
 
-## 🚀 Features
+## 🌟 Features
 
 - **Natural Language Queries**: Ask questions about your data
 - **Smart SQL Generation**: AI-powered SQL query generation using OpenAI GPT
@@ -82,7 +86,7 @@ cd dataviz-ai
 For full functionality with real data queries, copy the environment template and add your OpenAI API key:
 
 ```bash
-cp .env.template .env
+cp env.template .env
 ```
 
 Edit `.env` and add your OpenAI API key:
@@ -186,6 +190,41 @@ Once the backend is running, visit http://localhost:8000/docs for interactive AP
 
 - `POST /ask` - Submit a natural language question
 
+## 🤝 Contributing
+
+We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to submit pull requests, report issues, and contribute to the project.
+
+### Quick Contribution Steps
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [OpenAI](https://openai.com/) for providing the GPT API
+- [FastAPI](https://fastapi.tiangolo.com/) for the excellent web framework
+- [Next.js](https://nextjs.org/) for the React framework
+- [Recharts](https://recharts.org/) for the charting library
+- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
+
+## 📞 Support
+
+- 🐛 **Issues**: [GitHub Issues](https://github.com/nicvazquezdev/dataviz-ai/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/nicvazquezdev/dataviz-ai/discussions)
+
+## ⭐ Star History
+
+If you find this project helpful, please consider giving it a star on GitHub!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nicvazquezdev/dataviz-ai&type=Date)](https://star-history.com/#nicvazquezdev/dataviz-ai&Date)
+
 ## 🐛 Troubleshooting
 
 ### Common Issues
@@ -203,3 +242,18 @@ Once the backend is running, visit http://localhost:8000/docs for interactive AP
 3. **Invalid Question Error**
    - Try more specific questions about your data
    - Ensure your question relates to data analysis
+
+## 📈 Roadmap
+
+- [ ] Support for more database types (MySQL, SQLite)
+- [ ] Advanced chart types (scatter plots, heatmaps)
+- [ ] Data export functionality
+- [ ] User authentication and data isolation
+- [ ] Custom data source connectors
+- [ ] Mobile app version
+- [ ] Multi-language support
+- [ ] Advanced analytics features
+
+## 🔄 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes and releases.
