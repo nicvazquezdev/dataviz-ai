@@ -12,6 +12,13 @@
 
 A modern, open-source web application that allows users to query their data using natural language and get instant visualizations. Built with FastAPI, Next.js, and powered by OpenAI's GPT models.
 
+<br />
+<img width="1892" height="546" alt="Screenshot 2025-08-29 at 5 08 06 PM" src="https://github.com/user-attachments/assets/3df800b0-81cc-4bd4-97f2-1be44887a913" />
+<br />
+<br />
+<img width="1892" height="941" alt="Screenshot 2025-08-29 at 5 10 00 PM" src="https://github.com/user-attachments/assets/f6e398e3-5955-48bd-9e85-97fdd4bc6276" />
+<br />
+
 ## 🌟 Features
 
 - **Natural Language Queries**: Ask questions about your data
