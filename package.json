@@ -17,6 +17,7 @@
     "lint": "npm run lint:backend && npm run lint:frontend",
     "lint:backend": "cd backend && flake8 . && black --check . && isort --check-only .",
     "lint:frontend": "cd frontend && npm run lint",
+    "type-check": "cd frontend && npm run type-check",
     "format": "npm run format:backend && npm run format:frontend",
     "format:backend": "cd backend && black . && isort .",
     "format:frontend": "cd frontend && npm run format",
