@@ -7,7 +7,14 @@ from datetime import datetime, timedelta
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Initialize OpenAI client only if API key is available
+api_key = os.getenv("OPENAI_API_KEY")
+client = None
+if api_key and api_key.strip() != "":
+    try:
+        client = OpenAI(api_key=api_key)
+    except Exception:
+        client = None
 
 def generate_dummy_data(question: str) -> dict:
     """Generate dummy data based on the question"""
@@ -153,9 +160,8 @@ def generate_sql(question: str, schema_description: str) -> str:
     if not is_valid_question(question):
         raise ValueError("Invalid question: The question doesn't appear to be a valid data query.")
     
-    # Check if API key is available
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key or api_key.strip() == "":
+    # Check if OpenAI client is available
+    if client is None:
         raise ValueError("API_KEY_MISSING: No OpenAI API key configured")
     
     system_prompt = (
