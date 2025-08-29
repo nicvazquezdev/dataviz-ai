@@ -17,8 +17,7 @@ We take the security of DataViz AI seriously. If you believe you have found a se
 ### Reporting Process
 
 1. **DO NOT** create a public GitHub issue for the vulnerability.
-2. **DO** email us at [INSERT SECURITY EMAIL] with the subject line `[SECURITY] DataViz AI Vulnerability Report`.
-3. **DO** include a detailed description of the vulnerability, including:
+2. **DO** include a detailed description of the vulnerability, including:
    - Type of issue (buffer overflow, SQL injection, cross-site scripting, etc.)
    - Full paths of source file(s) related to the vulnerability
    - The line number(s) of source file(s) related to the vulnerability
