@@ -66,7 +66,7 @@ People _love_ thorough bug reports. I'm not even kidding.
 2. **Set up environment variables**
 
    ```bash
-   cp env.template .env
+   cp .env.template .env
    # Edit .env with your OpenAI API key (optional - demo mode works without it)
    ```
 

@@ -83,7 +83,9 @@ cd dataviz-ai
 
 ### 2. Environment Setup (Optional)
 
-For full functionality with real data queries, copy the environment template and add your OpenAI API key:
+**The app works out of the box without any configuration!**
+
+For full functionality with real data queries using OpenAI's GPT models, you can optionally copy the environment template and add your OpenAI API key:
 
 ```bash
 cp env.template .env
@@ -99,6 +101,8 @@ POSTGRES_HOST=db
 POSTGRES_PORT=5432
 POSTGRES_DB=dataviz_ai
 ```
+
+**Note**: If no `.env` file is present or no OpenAI API key is configured, the app will automatically switch to demo mode and provide realistic sample data for testing and demonstration purposes.
 
 💡 **Note**: If you don't configure an API key, the application will automatically run in **Demo Mode** and show realistic sample data based on your questions.
 
